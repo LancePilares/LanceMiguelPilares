@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colored Web Page</title>
+    <style>
+        /* Body background */
+        body {
+            background-color: #f0f8ff; /* Light blue */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Big box container */
+        .big-box {
+            width: 120%;
+            height: 400px;
+            border: 2px solid #000; /* Black border */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            box-sizing: border-box;
+            position: relative;
+            background-color: #e6e6fa; /* Lavender background color */
+        }
+
+        /* Navigation links */
+        .nav-links {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .nav-links a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #007acc; /* Blue */
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+            color: #ff6347; /* Tomato */
+        }
+
+        /* Horizontal line below the navigation links */
+        .below-nav-hr {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            border: 0;
+            border-top: 2px solid #000; /* Black line */
+        }
+
+        /* Styles for the vertical rectangles */
+        .rectangle-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 60px; /* Adjust to position below the horizontal line */
+        }
+
+        /* Adding unique colors to each rectangle */
+        .rectangle:nth-child(1) {
+            background-color: #add8e6; /* Light blue */
+        }
+
+        .rectangle:nth-child(2) {
+            background-color: #90ee90; /* Light green */
+        }
+
+        .rectangle:nth-child(3) {
+            background-color: #ffb6c1; /* Light pink */
+        }
+
+        .rectangle {
+            width: 100px;
+            height: 200px;
+            border: 2px solid #000; /* Black border */
+            position: relative; /* Ensures the hr inside is positioned relative to the rectangle */
+            padding-top: 20px;
+            box-sizing: border-box;
+        }
+
+        .rectangle hr {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            border: 0;
+            border-top: 2px solid #000; /* Black line */
+            transform: translateY(-50%); /* Centers the hr vertically */
+        }
+
+        .rectangle .label-container {
+            position: absolute;
+            top: 60%; /* Positioning below the horizontal line */
+            left: 10px;
+            font-size: 14px;
+            color: #333; /* Dark grey for text */
+        }
+
+        /* Small buttons (Qty/Add) */
+        .small-boxes {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            justify-content: space-between;
+            width: 80%; /* Adjust to fit the rectangle width */
+        }
+
+        .small-box {
+            width: 40px;
+            height: 20px;
+            background-color: #ffffff; /* White background */
+            border: 1px solid #000; /* Black border */
+            text-align: center;
+            line-height: 20px; /* Centers the text vertically */
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .small-box:hover {
+            background-color: #f4a460; /* Sandy brown on hover */
+        }
+
+        /* Horizontal line at the bottom of the big-box */
+        .bottom-hr {
+            position: absolute;
+            bottom: 20px; /* Adjust based on your design */
+            left: 0;
+            width: 100%;
+            border: 0;
+            border-top: 2px solid #000; /* Black line */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; background-color: #ffcccb; color: #333; padding: 20px;">Welcome to Our Store</h1>
+    <div class="big-box">
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Products</a>
+            <a href="#">Sign Up</a>
+        </div>
+        <!-- Horizontal line below the navigation links -->
+        <hr class="below-nav-hr">
+        <div class="rectangle-container">
+            <div class="rectangle">
+                <hr>
+                <div class="label-container">
+                    <div>Name:</div>
+                    <div>Price:</div>
+                </div>
+                <div class="small-boxes">
+                    <div class="small-box" onclick="updateQty(this)">Qty</div>
+                    <div class="small-box" onclick="addItem(this)">Add</div>
+                </div>
+            </div>
+            <div class="rectangle">
+                <hr>
+                <div class="label-container">
+                    <div>Name:</div>
+                    <div>Price:</div>
+                </div>
+                <div class="small-boxes">
+                    <div class="small-box" onclick="updateQty(this)">Qty</div>
+                    <div class="small-box" onclick="addItem(this)">Add</div>
+                </div>
+            </div>
+            <div class="rectangle">
+                <hr>
+                <div class="label-container">
+                    <div>Name:</div>
+                    <div>Price:</div>
+                </div>
+                <div class="small-boxes">
+                    <div class="small-box" onclick="updateQty(this)">Qty</div>
+                    <div class="small-box" onclick="addItem(this)">Add</div>
+                </div>
+            </div>
+        </div>
+        <!-- Horizontal line at the bottom of the big-box -->
+        <hr class="bottom-hr">
+    </div>
+
+    <script>
+        function updateQty(element) {
+            let qty = prompt("Enter quantity:");
+            if (qty !== null && !isNaN(qty) && qty > 0) {
+                element.textContent = "Qty: " + qty;
+            } else {
+                alert("Please enter a valid quantity.");
+            }
+        }
+
+        function addItem(element) {
+            let qtyBox = element.parentNode.querySelector(".small-box");
+            let qtyText = qtyBox.textContent;
+            if (qtyText.startsWith("Qty: ")) {
+                let qty = qtyText.split(": ")[1];
+                alert("Added " + qty + " items to the cart.");
+            } else {
+                alert("Please specify the quantity first.");
+            }
+        }
+    </script>
+</body>
+</html>
